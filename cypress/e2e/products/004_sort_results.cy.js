@@ -1,4 +1,4 @@
-describe('GET Product API Tests', () => {
+describe('Verify that all products are returned in descending order of IDs', () => {
   const products = [
     {
       id: 1,
@@ -165,22 +165,29 @@ describe('GET Product API Tests', () => {
     },
   ];
 
-  products.forEach((product) => {
+  // Start the loop from the last index of the products array
+  for (let i = products.length - 1; i > 0; i--) {
+    const product = products[i];
+
     it(`GET Product ${product.id}`, () => {
       cy.request('GET', `https://fakestoreapi.com/products/${product.id}`).then(
         (response) => {
           // Ensure the response status is 200
           expect(response.status).to.eq(200);
           // Additional assertions
-          // Remove HTML entities like &nbsp from the title and description
+          // Remove HTML entities like &nbsp; from the title and description
           const cleanedTitle = response.body.title.replace(/&nbsp;/g, '');
           const cleanedDescription = response.body.description.replace(/&nbsp;/g, '');
           expect(cleanedTitle.trim()).to.eq(product.title.trim());
           expect(response.body.price).to.eq(product.price);
           expect(cleanedDescription).to.eq(product.description.trim());
           expect(response.body.category).to.eq(product.category);
+
+          // Check descending order of IDs
+          const nextProduct = products[i - 1];
+          expect(product.id).to.be.gt(nextProduct.id);
         }
       );
     });
-  });
+  }
 });
