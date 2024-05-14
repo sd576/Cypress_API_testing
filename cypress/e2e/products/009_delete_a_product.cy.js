@@ -8,8 +8,7 @@ it('DELETE an existing product and verify the changes are applied', () => {
     // Assert the response status code
     expect(response.status).to.eq(200); // Adjusted to check for 200 status code
 
-    // Additional assertions if needed
-    // For example, check if the response body contains the deleted product details
+    // Additional assertions
     expect(response.body).to.deep.equal({
       id: 6,
       title: 'Solid Gold Petite Micropave ',

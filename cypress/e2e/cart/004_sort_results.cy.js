@@ -1,0 +1,131 @@
+describe(`Verify the functionality of retrieving the number of carts in descending "Cart id" order`, () => {
+  const expectedCarts = [
+    {
+      id: 7,
+      userId: 8,
+      date: '2020-03-01T00:00:00.000Z',
+      products: [
+        {
+          productId: 18,
+          quantity: 1,
+        },
+      ],
+      __v: 0,
+    },
+    {
+      id: 6,
+      userId: 4,
+      date: '2020-03-01T00:00:00.000Z',
+      products: [
+        {
+          productId: 10,
+          quantity: 2,
+        },
+        {
+          productId: 12,
+          quantity: 3,
+        },
+      ],
+      __v: 0,
+    },
+    {
+      id: 5,
+      userId: 3,
+      date: '2020-03-01T00:00:00.000Z',
+      products: [
+        {
+          productId: 7,
+          quantity: 1,
+        },
+        {
+          productId: 8,
+          quantity: 1,
+        },
+      ],
+      __v: 0,
+    },
+    {
+      id: 4,
+      userId: 3,
+      date: '2020-01-01T00:00:00.000Z',
+      products: [
+        {
+          productId: 1,
+          quantity: 4,
+        },
+      ],
+      __v: 0,
+    },
+    {
+      id: 3,
+      userId: 2,
+      date: '2020-03-01T00:00:00.000Z',
+      products: [
+        {
+          productId: 1,
+          quantity: 2,
+        },
+        {
+          productId: 9,
+          quantity: 1,
+        },
+      ],
+      __v: 0,
+    },
+    {
+      id: 2,
+      userId: 1,
+      date: '2020-01-02T00:00:00.000Z',
+      products: [
+        {
+          productId: 2,
+          quantity: 4,
+        },
+        {
+          productId: 1,
+          quantity: 10,
+        },
+        {
+          productId: 5,
+          quantity: 2,
+        },
+      ],
+      __v: 0,
+    },
+    {
+      id: 1,
+      userId: 1,
+      date: '2020-03-02T00:00:00.000Z',
+      products: [
+        {
+          productId: 1,
+          quantity: 4,
+        },
+        {
+          productId: 2,
+          quantity: 1,
+        },
+        {
+          productId: 3,
+          quantity: 6,
+        },
+      ],
+      __v: 0,
+    },
+  ];
+
+  it('Should retrieve carts sorted in descending order', () => {
+    // Make a request to fetch carts sorted in descending order
+    cy.request('https://fakestoreapi.com/carts?sort=desc').then((response) => {
+      // Ensure the response status is 200
+      expect(response.status).to.eq(200);
+      // Loop through each cart in the response array and make assertions
+      response.body.forEach((cart, index) => {
+        const expectedCart = expectedCarts[index];
+        expect(cart).to.deep.equal(expectedCart);
+
+        // Add additional assertions if needed for each cart's properties
+      });
+    });
+  });
+});
