@@ -33,7 +33,7 @@ describe('Update an existing product and verify the changes are applied', () => 
       body: updatedProductData,
     }).then((response) => {
       expect(response.status).to.eq(200);
-
+      // updated price from 9.99 to 10.99
       expect(response.body.price).to.eq(10.99);
     });
   });

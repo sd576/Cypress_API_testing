@@ -1,14 +1,10 @@
 it('DELETE an existing product and verify the changes are applied', () => {
-  // Make a request to delete the product with ID 6
   cy.request({
     method: 'DELETE',
     url: 'https://fakestoreapi.com/products/6',
-    failOnStatusCode: false, // Add this to prevent Cypress from failing the test due to a non-2xx response
+    failOnStatusCode: false,
   }).then((response) => {
-    // Assert the response status code
-    expect(response.status).to.eq(200); // Adjusted to check for 200 status code
-
-    // Additional assertions
+    expect(response.status).to.eq(200);
     expect(response.body).to.deep.equal({
       id: 6,
       title: 'Solid Gold Petite Micropave ',
