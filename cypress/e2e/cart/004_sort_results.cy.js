@@ -115,16 +115,12 @@ describe(`Verify the functionality of retrieving the number of carts in descendi
   ];
 
   it('Should retrieve carts sorted in descending order', () => {
-    // Make a request to fetch carts sorted in descending order
     cy.request('https://fakestoreapi.com/carts?sort=desc').then((response) => {
-      // Ensure the response status is 200
       expect(response.status).to.eq(200);
-      // Loop through each cart in the response array and make assertions
+
       response.body.forEach((cart, index) => {
         const expectedCart = expectedCarts[index];
         expect(cart).to.deep.equal(expectedCart);
-
-        // Add additional assertions if needed for each cart's properties
       });
     });
   });

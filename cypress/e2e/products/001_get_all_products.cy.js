@@ -169,10 +169,7 @@ describe('Verify that all products are returned in the response', () => {
     it(`GET Product ${product.id}`, () => {
       cy.request('GET', `https://fakestoreapi.com/products/${product.id}`).then(
         (response) => {
-          // Ensure the response status is 200
           expect(response.status).to.eq(200);
-          // Additional assertions
-          // Remove HTML entities like &nbsp from the title and description
           const cleanedTitle = response.body.title.replace(/&nbsp;/g, '');
           const cleanedDescription = response.body.description.replace(/&nbsp;/g, '');
           expect(cleanedTitle.trim()).to.eq(product.title.trim());

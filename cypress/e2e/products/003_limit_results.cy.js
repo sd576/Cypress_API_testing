@@ -44,23 +44,18 @@ describe('Test pagination by limiting the number of products returned per reques
   ];
 
   it('Should limit the number of products returned', () => {
-    // Make a request to fetch products with a limit of 5
     cy.request('https://fakestoreapi.com/products?limit=5').then((response) => {
-      // Ensure the response status is 200
       expect(response.status).to.eq(200);
-      // Ensure that the response contains an array of 5 products
       expect(response.body).to.have.lengthOf(5);
-      // Loop through each product in the response array and make assertions
       response.body.forEach((product, index) => {
-        // Get the expected product from the products array based on its index
         const expectedProduct = products[index];
-        // Make assertions on each product's properties
+
         expect(product.id).to.eq(expectedProduct.id);
         expect(product.title.trim()).to.eq(expectedProduct.title.trim());
         expect(product.price).to.eq(expectedProduct.price);
         expect(product.description).to.eq(expectedProduct.description);
         expect(product.category).to.eq(expectedProduct.category);
-        // Ensure that the id is not greater than 5
+
         expect(product.id).to.be.lte(5);
       });
     });

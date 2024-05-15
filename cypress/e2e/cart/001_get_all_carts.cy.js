@@ -1,5 +1,4 @@
 describe('Fake Store API - Carts Endpoint', () => {
-  // Define the expected response
   const expectedResponse = [
     {
       id: 1,
@@ -116,15 +115,9 @@ describe('Fake Store API - Carts Endpoint', () => {
   ];
 
   it('should return a list of carts with correct structure', () => {
-    // Make a GET request to the /carts endpoint
     cy.request('GET', 'https://fakestoreapi.com/carts').then((response) => {
-      // Check that the response status is 200
       expect(response.status).to.eq(200);
-
-      // Check that the response body is an array
       expect(response.body).to.be.an('array');
-
-      // Check that the response matches the expected structure and content
       expect(response.body).to.deep.equal(expectedResponse);
     });
   });

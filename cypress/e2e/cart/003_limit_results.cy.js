@@ -95,7 +95,6 @@ describe('Verify the functionality of retrieving a limited number of carts from 
         const expectedCart = expectedCarts[index];
         expect(cart).to.deep.equal(expectedCart);
 
-        // Assert on each product in the cart
         cart.products.forEach((product, productIndex) => {
           const expectedProduct = expectedCart.products[productIndex];
           expect(product).to.deep.equal(expectedProduct);

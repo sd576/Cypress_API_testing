@@ -1,8 +1,6 @@
 it('Verify that a specific product is returned when requesting by its ID', () => {
   cy.request('GET', 'https://fakestoreapi.com/products/3').then((response) => {
-    // Ensure the response status is 200
     expect(response.status).to.eq(200);
-    // Additional assertions
     expect(response.body.title.trim()).to.eq('Mens Cotton Jacket');
     expect(response.body.price).to.eq(55.99);
     expect(response.body.description).to.eq(
